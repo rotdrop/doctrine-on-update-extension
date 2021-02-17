@@ -160,12 +160,15 @@ class Listener extends MappedEventSubscriber
           }
         }
 
+        $constraintName = $reference->constraintName;
+
         $referencedTable = $targetMeta->getTableName();
         $table->addForeignKeyConstraint(
           $referencedTable,
           [ $columnName ],
           [ $referencedColumn ],
-          $options);
+          $options,
+          $constraintName);
 
       }
     }
