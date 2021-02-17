@@ -7,7 +7,7 @@
     "extensions",
     "on update",
     "onUpdate",
-    "cascade",
+    "cascade"
   ],
   "homepage": "https://github.com/rotdrop/doctrine-on-update-extension.git",
   "license": "MIT",
@@ -19,22 +19,26 @@
   ],
   "require": {
     "php": ">=7.4",
-    "gedmo/doctrine-extensions": "dev-master"
+    "gedmo/doctrine-extensions": "^3.0.0"
   },
   "require-dev": {
     "doctrine/orm": ">=2.5.0",
-    "doctrine/common": ">=2.5.0",
-    "phpunit/phpunit": "^4.8",
-    "mockery/mockery": "^0.9.4",
-    "codeclimate/php-test-reporter": "^0.3.0",
-    "defuse/php-encryption": "^2.0",
+    "doctrine/common": ">=2.5.0"
   },
   "suggest": {
-    "doctrine/orm": "to use the extensions with the ORM",
+    "doctrine/orm": "to use the extensions with the ORM"
   },
   "autoload": {
     "psr-4": {
       "CJH\\Doctrine\\Extensions\\": "src"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/MisatoTremor/DoctrineExtensions"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
