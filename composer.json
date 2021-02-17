@@ -1,0 +1,40 @@
+{
+  "name": "cjh/doctrine-on-update-extension",
+  "type": "library",
+  "description": "Doctrine2 extensions which allows to add onUpdate=CASCADE via annotations",
+  "keywords": [
+    "doctrine",
+    "extensions",
+    "on update",
+    "onUpdate",
+    "cascade",
+  ],
+  "homepage": "https://github.com/rotdrop/doctrine-on-update-extension.git",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Claus-Justus Heine",
+      "email": "himself@claus-justus-heine.de"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "gedmo/doctrine-extensions": "dev-master"
+  },
+  "require-dev": {
+    "doctrine/orm": ">=2.5.0",
+    "doctrine/common": ">=2.5.0",
+    "phpunit/phpunit": "^4.8",
+    "mockery/mockery": "^0.9.4",
+    "codeclimate/php-test-reporter": "^0.3.0",
+    "defuse/php-encryption": "^2.0",
+  },
+  "suggest": {
+    "doctrine/orm": "to use the extensions with the ORM",
+  },
+  "autoload": {
+    "psr-4": {
+      "CJH\\Doctrine\\Extensions\\": "src"
+    }
+  }
+}
