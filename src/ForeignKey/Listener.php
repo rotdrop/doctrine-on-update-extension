@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Claus-Justus Heine
- * @copyright 2021 Claus-Justus Heine <himself@claus-justus-heine.de>
+ * @copyright 2021, 2022 Claus-Justus Heine <himself@claus-justus-heine.de>
  */
 
 namespace CJH\Doctrine\Extensions\ForeignKey;
@@ -30,6 +30,7 @@ class Listener extends MappedEventSubscriber
 
   public function __construct(EntityManagerInterface $entityManager)
   {
+    parent::__construct();
     $this->entityManager = $entityManager;
   }
 
