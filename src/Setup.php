@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Claus-Justus Heine
- * @copyright 2021 Claus-Justus Heine <himself@claus-justus-heine.de>
+ * @copyright 2021, 2023 Claus-Justus Heine <himself@claus-justus-heine.de>
  */
 
 namespace CJH\Doctrine\Extensions;
@@ -20,7 +20,7 @@ final class Setup
    */
   public static function registerAnnotations():void
   {
-    AnnotationRegistry::registerFile(__DIR__.'/Mapping/Annotation/ForeignKey.php');
+    // AnnotationRegistry::registerFile(__DIR__.'/Mapping/Annotation/ForeignKey.php');
   }
 }
 
