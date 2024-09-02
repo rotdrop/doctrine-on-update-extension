@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Claus-Justus Heine
- * @copyright 2021, 2022 Claus-Justus Heine <himself@claus-justus-heine.de>
+ * @copyright 2021, 2022, 2024 Claus-Justus Heine <himself@claus-justus-heine.de>
  */
 
 namespace CJH\Doctrine\Extensions\ForeignKey;
@@ -28,6 +28,7 @@ class Listener extends MappedEventSubscriber
     'SET DEFAULT',
   ];
 
+  /** {@inheritdoc} */
   public function __construct(EntityManagerInterface $entityManager)
   {
     parent::__construct();
@@ -94,10 +95,10 @@ class Listener extends MappedEventSubscriber
 
       // now we need to determine the local column name(s)
       if (!empty($meta->fieldMappings[$property])) {
-        $columnNames[] = $meta->fieldMappings[$property]['columnName'];
-      } else if (!empty($meta->associationMappings[$property]['joinColumns'])) {
-        $joinColumns = $meta->associationMappings[$property]['joinColumns'];
-        $columnNames = array_map(function($joinColumn) { return $joinColumn['name']; }, $joinColumns);
+        $columnNames[] = $meta->fieldMappings[$property]->columnName;
+      } else if (!empty($meta->associationMappings[$property]->joinColumns)) {
+        $joinColumns = $meta->associationMappings[$property]->joinColumns;
+        $columnNames = array_map(function($joinColumn) { return $joinColumn->name; }, $joinColumns);
       }
 
       if (empty($columnNames)) {
@@ -135,8 +136,8 @@ class Listener extends MappedEventSubscriber
           // can still be an association mapping
           $found = false;
           foreach ($targetMeta->associationMappings as $association) {
-            foreach ($association['joinColumns'] as $joinColumn) {
-              if ($joinColumn['name'] === $referencedColumn) {
+            foreach ($association->joinColumns as $joinColumn) {
+              if ($joinColumn->name === $referencedColumn) {
                 $found = true;
                 break 2;
               }
