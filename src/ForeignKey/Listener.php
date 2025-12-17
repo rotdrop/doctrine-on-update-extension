@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Claus-Justus Heine
- * @copyright 2021, 2022, 2024 Claus-Justus Heine <himself@claus-justus-heine.de>
+ * @copyright 2021, 2022, 2024, 2025 Claus-Justus Heine <himself@claus-justus-heine.de>
  */
 
 namespace CJH\Doctrine\Extensions\ForeignKey;
@@ -156,13 +156,24 @@ class Listener extends MappedEventSubscriber
           if (!empty($reference->{$cascadeOption})) {
             $option = strtoupper($reference->{$cascadeOption});
             if (array_search($option, self::CASCADE_OPTIONS) === false) {
-              throw new \InvalidArgumentException('Unknown "'.$cascadeOption.'" option: "'.$option.'"');
+              throw new \InvalidArgumentException('Unknown "' . $cascadeOption . '" option: "' . $option . '"');
             }
             $options[$cascadeOption] = $option;
           }
         }
 
         $constraintName = $reference->constraintName;
+        if (empty($constraintName)) {
+          $parts = [
+            'fk',
+            dechex(crc32($meta->getTableName())) . dechex(crc32($columnName)),
+          ];
+          foreach ($options as $cascadeOption => $option) {
+            $parts[] = $cascadeOption;
+            $parts[] = $option;
+          }
+          $constraintName = strtoupper(implode('_', $parts));
+        }
 
         $referencedTable = $targetMeta->getTableName();
         $table->addForeignKeyConstraint(
@@ -176,8 +187,3 @@ class Listener extends MappedEventSubscriber
     }
   }
 }
-
-// Local Variables: ***
-// c-basic-offset: 2 ***
-// indent-tabs-mode: nil ***
-// End: ***
